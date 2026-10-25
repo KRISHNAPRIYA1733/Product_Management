@@ -48,6 +48,20 @@ class ProductManager(Dbconnection):
         except Exception as e:
             print(e)
 
+    def delete(self,id=None):
+        try:
+            record=self.get_object(id=id)
+            if record==None:
+                print("product not exist..")
+            else:
+                query="delete from product where id=%s"
+                values=(id,)
+                self.cursor.execute(query,values)
+                self.connection.commit()
+                print("product deleted...")
+        except Exception as e:
+            print(e)
+
 
 
 connection=Dbconnection()
@@ -55,3 +69,10 @@ products=ProductManager()
 products.get()
 #products.get_object(id=1)
 #products.put(id=1,name="chips",category="food")
+#products.delete(id=3)
+
+
+
+
+
+
